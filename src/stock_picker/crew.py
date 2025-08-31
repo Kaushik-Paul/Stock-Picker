@@ -1,6 +1,6 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from crewai_tools import BraveSearchTool
+from .tools.throttled_brave_tool import ThrottledBraveSearchTool
 from pydantic import BaseModel, Field
 from typing import List
 from .tools.push_tool import MailJetNotificationTool
@@ -37,12 +37,12 @@ class StockPicker():
     @agent
     def trending_company_finder(self) -> Agent:
         return Agent(config=self.agents_config['trending_company_finder'],
-                     tools=[BraveSearchTool()], memory=True)
+                     tools=[ThrottledBraveSearchTool()], memory=True)
     
     @agent
     def financial_researcher(self) -> Agent:
         return Agent(config=self.agents_config['financial_researcher'], 
-                     tools=[BraveSearchTool()])
+                     tools=[ThrottledBraveSearchTool()])
 
     @agent
     def stock_picker(self) -> Agent:
