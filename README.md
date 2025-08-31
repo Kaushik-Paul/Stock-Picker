@@ -62,7 +62,8 @@ python3 -m venv .venv
 source .venv/bin/activate    # Windows: .venv\Scripts\activate
 ```
 
-### Option A — Install with uv (recommended)
+### 3) Install dependencies
+#### Option A — Install with uv (recommended)
 1) Install uv
 - Linux/macOS:
 ```bash
@@ -80,13 +81,22 @@ powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 uv sync
 ```
 
-### Option B — Install with pip
+#### Option B — Install with pip
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3) Create a .env file
-Create a `.env` in the project root with the following variables (adjust as needed):
+### 4) Set up MailJet for email delivery
+1. Go to [MailJet](https://www.mailjet.com/) and sign up for a free account
+2. After logging in, navigate to your [API Key Management](https://app.mailjet.com/account/apikeys)
+3. Create a new API key pair (API Key and Secret Key)
+4. Verify your sender email:
+   - Go to [Sender Authentication & Domains](https://app.mailjet.com/account/sender)
+   - Add and verify the email address you want to use for sending emails
+   - Follow the verification email sent by MailJet
+
+### 5) Create a .env file
+Create a `.env` file in the project root with the following variables (adjust as needed):
 
 ```ini
 # OpenRouter (LLM provider used in agents.yaml)
@@ -97,16 +107,12 @@ OPENROUTER_API_KEY=your_openrouter_key
 BRAVE_API_KEY=your_brave_search_api_key
 
 # Mailjet (email delivery)
-MAILJET_API_KEY=your_mailjet_key
-MAILJET_API_SECRET=your_mailjet_secret
-MAILJET_FROM_EMAIL=from_address@yourdomain.com
+MAILJET_API_KEY=your_mailjet_key_from_step_4
+MAILJET_API_SECRET=your_mailjet_secret_from_step_4
+MAILJET_FROM_EMAIL=your_verified_email@yourdomain.com
 ```
 
-Notes
-- The Brave Search tool reads its API key from the environment as defined by crewai_tools. If your environment uses a different variable name, follow the crewai_tools BraveSearchTool documentation.
-- Ensure the `MAILJET_FROM_EMAIL` domain is verified in your Mailjet account.
-
-### 4) Run the app
+### 6) Run the app
 Using uv:
 ```bash
 uv run python -m src.stock_picker.main
@@ -116,6 +122,18 @@ Using python directly:
 python -m src.stock_picker.main
 ```
 Gradio will print a local URL (e.g., http://127.0.0.1:7860). Open it in your browser.
+
+## Built with CrewAI
+
+This project leverages [CrewAI](https://docs.crewai.com/en/introduction), a powerful framework for orchestrating role-playing, autonomous AI agents. CrewAI enables the creation of sophisticated AI workflows where different agents can work together to accomplish complex tasks.
+
+Key features used in this project:
+- **Agents**: Specialized AI agents with specific roles (finder, researcher, picker, email sender)
+- **Tasks**: Well-defined tasks that agents perform in sequence
+- **Tools**: Custom tools for web search and email sending
+- **Delegation**: Hierarchical task delegation between agents
+
+To learn more about CrewAI and how to extend this project, visit the [official documentation](https://docs.crewai.com/en/introduction).
 
 ## Configuration
 
