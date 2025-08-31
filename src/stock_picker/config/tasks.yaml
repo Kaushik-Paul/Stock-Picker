@@ -19,9 +19,11 @@ research_trending_companies:
 pick_best_company:
   description: >
     Analyze the research findings and pick the best company for investment.
-    Send an email to the user with this email address: {user_email_address} with the decision and complete report on why you chose this company, and which companies were not selected.
+    Produce a clear markdown report explaining:
+      * the chosen company and why it was selected
+      * the companies that were not selected and why.
   expected_output: >
-    The chosen company and why it was chosen with detailed report; the companies that were not selected and why they were not selected.
+    A markdown-formatted report as described above. It must not include an email subject or any email headers.
   agent: stock_picker
   context:
     - research_trending_companies
@@ -29,10 +31,11 @@ pick_best_company:
 
 send_email_task:
   description: >
-    Given a markdown file, you convert it to HTML first and then send the email to {user_email_address}.
+    Given a markdown file, convert it to HTML, create a subject for the email and send the email to {user_email_address}.
+    After sending, return **exactly** the original markdown content (unaltered), so the application can render it in the UI.
   expected_output: >
-    The markdown file before it was converted to HTML
+    The same markdown content that was provided to this task.
   agent: email_sender
   context:
     - pick_best_company
-  output_file: output/email_body.html
+  output_file: output/final_output.md

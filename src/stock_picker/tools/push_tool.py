@@ -40,7 +40,7 @@ class MailJetNotificationTool(BaseTool):
                         }
                     ],
                     "Subject": subject,
-                    "TextPart": message,
+                    "HTMLPart": message,
                 }
             ]
         }

@@ -1,5 +1,6 @@
 import gradio as gr
 
+
 class StockPickerUi:
 
     @staticmethod
@@ -23,10 +24,11 @@ class StockPickerUi:
             margin: 20px auto;
         }
         .result-content {
-            text-align: left !important;
-        }
-        .gradio-container .progress {
-            margin: 0 auto !important;
+            text-align: left;
+            display: inline-block;
+            margin: 20px auto;
+            max-width: 100%;
+            text-align: left;
         }
         .disclaimer {
             margin-top: 20px;
@@ -37,13 +39,13 @@ class StockPickerUi:
             font-size: 0.9em;
         }
         """
-        
+
         custom_js = "() => { document.title = 'AI Stock Picker'; }"
 
         with gr.Blocks(
-            title="AI Stock Picker",
-            css=css,
-            js=custom_js
+                title="AI Stock Picker",
+                css=css,
+                js=custom_js
         ) as demo:
             with gr.Column(elem_classes=["center-content"]):
                 gr.Markdown("# AI Stock Picker\n\nEnter a sector to analyze and get stock recommendations.")
