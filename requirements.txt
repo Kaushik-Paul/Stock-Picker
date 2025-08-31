@@ -1,0 +1,3 @@
+crewai[tools]>=0.108.0,<1.0.0
+mailjet-rest>=1.5.1
+gradio>=5.22.0
