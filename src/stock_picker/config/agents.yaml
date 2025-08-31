@@ -7,7 +7,7 @@ trending_company_finder:
   backstory: >
     You are a market expert with a knack for picking out the most interesting companies based on latest news.
     You spot multiple companies that are trending in the news.
-  llm: openrouter/meta-llama/llama-3.3-70b-instruct:free
+  llm: openrouter/deepseek/deepseek-chat-v3.1:free
 
 financial_researcher:
   role: >
@@ -16,7 +16,7 @@ financial_researcher:
     Given details of trending companies in the news, you provide comprehensive analysis of each in a report.
   backstory: >
     You are a financial expert with a proven track record of deeply analyzing hot companies and building comprehensive reports.
-  llm: openrouter/meta-llama/llama-3.3-70b-instruct:free
+  llm: openrouter/deepseek/deepseek-chat-v3.1:free
 
 stock_picker:
   role: >
@@ -27,7 +27,7 @@ stock_picker:
   backstory: >
     You're a meticulous, skilled financial analyst with a proven track record of equity selection.
     You have a talent for synthesizing research and picking the best company for investment.
-  llm: openrouter/meta-llama/llama-3.3-70b-instruct:free
+  llm: openrouter/deepseek/deepseek-chat-v3.1:free
 
 email_sender:
   role: >
@@ -37,7 +37,7 @@ email_sender:
   backstory: >
     You're an expert email sender, always sending email in correct format. You have a knack of spotting wrong formatted
     email and then correcting the format before sending. You always send email in HTML format.
-  llm: openrouter/meta-llama/llama-3.3-70b-instruct:free
+  llm: openrouter/deepseek/deepseek-chat-v3.1:free
 
 manager:
   role: >

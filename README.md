@@ -8,7 +8,7 @@ An AI-powered stock research assistant that:
 - Picks the best candidate for investment with a clear, markdown report
 - Emails the full HTML report to you
 
-The app uses a Gradio UI backed by a CrewAI pipeline with multiple agents and tools. It relies on OpenRouter-hosted LLMs and Brave Search for web data.
+The app uses a Gradio UI backed by a CrewAI pipeline with multiple agents and tools. It relies on OpenRouter-hosted LLMs (DeepSeek Chat v3.1 by default) and Brave Search for web data.
 
 ## Live Demo
 - Access the hosted app on Hugging Face: https://huggingface.co/spaces/kaushikpaul/Stock-Picker
@@ -118,7 +118,7 @@ Gradio will print a local URL (e.g., http://127.0.0.1:7860). Open it in your bro
 
 ### LLMs and Agents
 - File: `src/stock_picker/config/agents.yaml`
-- Default models use OpenRouter model IDs like `openrouter/meta-llama/llama-3.3-70b-instruct:free` and a manager model.
+- Default agents use DeepSeek Chat v3.1 via OpenRouter: `openrouter/deepseek/deepseek-chat-v3.1:free`. The manager uses `openrouter/meta-llama/llama-3.1-405b-instruct:free`.
 - To change models or providers, update the `llm` field for each agent. Ensure the appropriate API key and base configuration are set for your provider.
 
 ### Tasks & Outputs
