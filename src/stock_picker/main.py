@@ -3,8 +3,8 @@ import warnings
 from datetime import datetime
 from dotenv import load_dotenv
 
-from stock_picker.crew import StockPicker
-from gradio_ui.stock_picker_ui import StockPickerUi
+from src.stock_picker.crew import StockPicker
+from src.stock_picker.gradio_ui.stock_picker_ui import StockPickerUi
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
