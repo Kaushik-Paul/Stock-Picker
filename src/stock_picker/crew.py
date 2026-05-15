@@ -42,8 +42,7 @@ class StockPicker():
     
     @agent
     def financial_researcher(self) -> Agent:
-        return Agent(config=self.agents_config['financial_researcher'], 
-                     tools=self._search_tools(), llm=create_llm())
+        return Agent(config=self.agents_config['financial_researcher'], llm=create_llm())
 
     @agent
     def stock_picker(self) -> Agent:
