@@ -1,4 +1,5 @@
 import os
+import json
 from inspect import signature
 from typing import Any, Dict, List, Optional, Union
 
@@ -31,6 +32,10 @@ def _env_required(name: str) -> str:
     return value
 
 
+def using_opencode_go() -> bool:
+    return not _env_bool("USE_OPENROUTER", default=False)
+
+
 def _strip_known_prefix(model: str, prefixes: tuple[str, ...]) -> str:
     for prefix in prefixes:
         if model.startswith(prefix):
@@ -45,6 +50,53 @@ def _openrouter_model(model: str) -> str:
 
 def _opencode_go_model(model: str) -> str:
     return _strip_known_prefix(model, ("opencode-go/", "openai/", "anthropic/"))
+
+
+def opencode_go_model_id() -> str:
+    return _opencode_go_model(os.getenv("OPENCODE_GO_MODEL", DEFAULT_OPENCODE_GO_MODEL))
+
+
+def opencode_go_uses_anthropic_endpoint(model: Optional[str] = None) -> bool:
+    model = _opencode_go_model(model or opencode_go_model_id())
+    return model.startswith("minimax-")
+
+
+def opencode_go_tools_enabled() -> bool:
+    override = os.getenv("OPENCODE_GO_ENABLE_TOOLS")
+    if override is not None:
+        return _env_bool("OPENCODE_GO_ENABLE_TOOLS")
+    return not opencode_go_uses_anthropic_endpoint()
+
+
+def _content_to_text(content: Any) -> str:
+    if content is None:
+        return ""
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        parts = []
+        for item in content:
+            if isinstance(item, str):
+                parts.append(item)
+            elif isinstance(item, dict):
+                if "text" in item:
+                    parts.append(str(item["text"]))
+                elif "content" in item:
+                    parts.append(_content_to_text(item["content"]))
+                elif item.get("type") in {"tool_use", "tool_result"}:
+                    continue
+                else:
+                    parts.append(json.dumps(item))
+            else:
+                parts.append(str(item))
+        return "\n".join(part for part in parts if part)
+    if isinstance(content, dict):
+        if "text" in content:
+            return str(content["text"])
+        if "content" in content:
+            return _content_to_text(content["content"])
+        return json.dumps(content)
+    return str(content)
 
 
 class OpenCodeGoAutoLLM(LLM):
@@ -87,7 +139,7 @@ class OpenCodeGoAutoLLM(LLM):
             return self._api_style
         if self._model_id in self._protocol_cache:
             return self._protocol_cache[self._model_id]
-        if self._model_id.startswith("minimax-"):
+        if opencode_go_uses_anthropic_endpoint(self._model_id):
             return "anthropic"
         return "openai"
 
@@ -122,7 +174,7 @@ class OpenCodeGoAutoLLM(LLM):
             for name, value in call_kwargs.items()
             if name in accepted_params and (name == "messages" or value is not None)
         }
-        return llm.call(**supported_kwargs)
+        return _content_to_text(llm.call(**supported_kwargs))
 
     def call(
         self,
@@ -182,7 +234,7 @@ def create_llm(
     manager: bool = False,
     timeout: Optional[Union[float, int]] = None,
 ) -> LLM:
-    if _env_bool("USE_OPENROUTER", default=False):
+    if not using_opencode_go():
         env_name = "OPENROUTER_MANAGER_MODEL" if manager else "OPENROUTER_MODEL"
         default_model = (
             DEFAULT_OPENROUTER_MANAGER_MODEL if manager else DEFAULT_OPENROUTER_MODEL
@@ -196,7 +248,7 @@ def create_llm(
         )
 
     return OpenCodeGoAutoLLM(
-        model=os.getenv("OPENCODE_GO_MODEL", DEFAULT_OPENCODE_GO_MODEL),
+        model=opencode_go_model_id(),
         api_key=_env_required("OPENCODE_GO_API_KEY"),
         temperature=temperature,
         timeout=timeout,

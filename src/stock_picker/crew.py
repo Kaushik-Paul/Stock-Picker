@@ -4,7 +4,7 @@ from .tools.throttled_brave_tool import ThrottledBraveSearchTool
 from pydantic import BaseModel, Field
 from typing import List
 from .tools.push_tool import MailJetNotificationTool
-from .model_client import create_llm
+from .model_client import create_llm, opencode_go_tools_enabled, using_opencode_go
 
 class TrendingCompany(BaseModel):
     """ A company that is in the news and attracting attention """
@@ -38,12 +38,12 @@ class StockPicker():
     @agent
     def trending_company_finder(self) -> Agent:
         return Agent(config=self.agents_config['trending_company_finder'],
-                     tools=[ThrottledBraveSearchTool()], llm=create_llm(), memory=True)
+                     tools=self._search_tools(), llm=create_llm(), memory=True)
     
     @agent
     def financial_researcher(self) -> Agent:
         return Agent(config=self.agents_config['financial_researcher'], 
-                     tools=[ThrottledBraveSearchTool()], llm=create_llm())
+                     tools=self._search_tools(), llm=create_llm())
 
     @agent
     def stock_picker(self) -> Agent:
@@ -53,6 +53,11 @@ class StockPicker():
     def email_sender(self) -> Agent:
         return Agent(config=self.agents_config['email_sender'],
                      tools=[MailJetNotificationTool()], llm=create_llm(), memory=True)
+
+    def _search_tools(self):
+        if using_opencode_go() and not opencode_go_tools_enabled():
+            return []
+        return [ThrottledBraveSearchTool()]
     
     @task
     def find_trending_companies(self) -> Task:
@@ -89,11 +94,13 @@ class StockPicker():
                 self.trending_company_finder(),
                 self.financial_researcher(),
                 self.stock_picker(),
+                self.email_sender(),
             ],
             tasks=[
                 self.find_trending_companies(),
                 self.research_trending_companies(),
                 self.pick_best_company(),
+                self.email_sender_task(),
             ],
             process=Process.sequential,
             verbose=True,
