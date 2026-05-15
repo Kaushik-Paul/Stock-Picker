@@ -1,7 +1,0 @@
-{
-  "notification": "ok",
-  "provider": "mailjet",
-  "status_code": 200,
-  "message_status": "success",
-  "to": "kprocks45@gmail.com"
-}
