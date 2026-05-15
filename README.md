@@ -105,8 +105,9 @@ USE_OPENROUTER=false
 
 # OpenCode Go
 OPENCODE_GO_API_KEY=your_opencode_go_key
-OPENCODE_GO_MODEL=minimax-m2.7
+OPENCODE_GO_MODEL=deepseek-v4-flash
 OPENCODE_GO_API_STYLE=auto
+OPENCODE_GO_ENABLE_TOOLS=true
 
 # OpenRouter
 OPENROUTER_API_KEY=your_openrouter_key
