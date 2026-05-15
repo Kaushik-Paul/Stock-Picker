@@ -11,11 +11,17 @@ class BraveSearchInput(BaseModel):
 class ThrottledBraveSearchTool(BraveSearchTool):
     """BraveSearchTool wrapper that sleeps between calls to avoid hitting rate limits."""
 
+    description: str = (
+        "Search the web with one concise query. Use this tool at most once, "
+        "then answer from the returned results."
+    )
+
     # seconds to wait between consecutive API calls
     _sleep_seconds: float = 1.5
 
     # Provide the correct args_schema expected by BaseTool / Pydantic
     args_schema: Type[BaseModel] = BraveSearchInput
+    max_usage_count: int = 1
 
     def _run(self, **kwargs):
         """Sleep then delegate to parent. Accepts only keyword args as parent expects."""

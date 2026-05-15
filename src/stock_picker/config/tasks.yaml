@@ -1,6 +1,7 @@
 find_trending_companies:
   description: >
     Find the top trending companies in the news in {sector}. Find new companies that you've not found before.
+    Use Brave Web Search at most once with a single concise query, then finish the task from that result.
     Return content only. Do not include tool-call markup, XML, or explanations.
   expected_output: >
     A JSON object with a companies array. Each company must include name, ticker, and reason.
@@ -35,6 +36,7 @@ pick_best_company:
 send_email_task:
   description: >
     Given a markdown file, convert it to HTML, create a subject for the email and send the email to {user_email_address}.
+    You must use the Send an Email tool to send it.
     After sending, return **exactly** the original markdown content (unaltered), so the application can render it in the UI.
   expected_output: >
     The same markdown content that was provided to this task.
