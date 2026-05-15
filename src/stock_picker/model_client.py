@@ -1,8 +1,8 @@
 import os
+from inspect import signature
 from typing import Any, Dict, List, Optional, Union
 
 from crewai import LLM
-from crewai.llms.base_llm import BaseLLM
 from dotenv import load_dotenv
 
 from .constants import (
@@ -47,7 +47,7 @@ def _opencode_go_model(model: str) -> str:
     return _strip_known_prefix(model, ("opencode-go/", "openai/", "anthropic/"))
 
 
-class OpenCodeGoAutoLLM(BaseLLM):
+class OpenCodeGoAutoLLM(LLM):
     _protocol_cache: dict[str, str] = {}
 
     def __init__(
@@ -97,6 +97,33 @@ class OpenCodeGoAutoLLM(BaseLLM):
     def _alternate_protocol(self) -> str:
         return "anthropic" if self._active_protocol == "openai" else "openai"
 
+    @staticmethod
+    def _call_llm(
+        llm: LLM,
+        *,
+        messages: Union[str, List[Dict[str, str]]],
+        tools: Optional[List[dict]],
+        callbacks: Optional[List[Any]],
+        available_functions: Optional[Dict[str, Any]],
+        from_task: Optional[Any],
+        from_agent: Optional[Any],
+    ) -> Union[str, Any]:
+        call_kwargs = {
+            "messages": messages,
+            "tools": tools,
+            "callbacks": callbacks,
+            "available_functions": available_functions,
+            "from_task": from_task,
+            "from_agent": from_agent,
+        }
+        accepted_params = signature(llm.call).parameters
+        supported_kwargs = {
+            name: value
+            for name, value in call_kwargs.items()
+            if name in accepted_params and (name == "messages" or value is not None)
+        }
+        return llm.call(**supported_kwargs)
+
     def call(
         self,
         messages: Union[str, List[Dict[str, str]]],
@@ -106,16 +133,16 @@ class OpenCodeGoAutoLLM(BaseLLM):
         from_task: Optional[Any] = None,
         from_agent: Optional[Any] = None,
     ) -> Union[str, Any]:
-        call_args = {
-            "messages": messages,
-            "tools": tools,
-            "callbacks": callbacks,
-            "available_functions": available_functions,
-            "from_task": from_task,
-            "from_agent": from_agent,
-        }
         try:
-            result = self._client_for(self._active_protocol).call(**call_args)
+            result = self._call_llm(
+                self._client_for(self._active_protocol),
+                messages=messages,
+                tools=tools,
+                callbacks=callbacks,
+                available_functions=available_functions,
+                from_task=from_task,
+                from_agent=from_agent,
+            )
             self._protocol_cache[self._model_id] = self._active_protocol
             return result
         except Exception as first_error:
@@ -124,7 +151,15 @@ class OpenCodeGoAutoLLM(BaseLLM):
             first_protocol = self._active_protocol
             self._active_protocol = self._alternate_protocol()
             try:
-                result = self._client_for(self._active_protocol).call(**call_args)
+                result = self._call_llm(
+                    self._client_for(self._active_protocol),
+                    messages=messages,
+                    tools=tools,
+                    callbacks=callbacks,
+                    available_functions=available_functions,
+                    from_task=from_task,
+                    from_agent=from_agent,
+                )
                 self._protocol_cache[self._model_id] = self._active_protocol
                 return result
             except Exception as second_error:
@@ -146,7 +181,7 @@ def create_llm(
     temperature: Optional[float] = 0.7,
     manager: bool = False,
     timeout: Optional[Union[float, int]] = None,
-) -> BaseLLM:
+) -> LLM:
     if _env_bool("USE_OPENROUTER", default=False):
         env_name = "OPENROUTER_MANAGER_MODEL" if manager else "OPENROUTER_MODEL"
         default_model = (

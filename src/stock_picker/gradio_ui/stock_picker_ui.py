@@ -1,3 +1,6 @@
+import os
+import socket
+
 import gradio as gr
 
 
@@ -38,7 +41,30 @@ class StockPickerUi:
 
     @staticmethod
     def launch_kwargs():
-        return {"css": StockPickerUi.CSS, "js": StockPickerUi.CUSTOM_JS}
+        kwargs = {"css": StockPickerUi.CSS, "js": StockPickerUi.CUSTOM_JS}
+        server_port = StockPickerUi._server_port()
+        if server_port is not None:
+            kwargs["server_port"] = server_port
+        return kwargs
+
+    @staticmethod
+    def _server_port():
+        configured_port = os.getenv("GRADIO_SERVER_PORT")
+        if configured_port:
+            return int(configured_port)
+
+        if os.getenv("SPACE_ID") or os.getenv("HF_SPACE_ID"):
+            return None
+
+        for port in range(7860, 8060):
+            try:
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                    sock.settimeout(0.1)
+                    if sock.connect_ex(("127.0.0.1", port)) != 0:
+                        return port
+            except OSError:
+                return None
+        return None
 
     @staticmethod
     def create_gradio_interface(run_stock_picker):

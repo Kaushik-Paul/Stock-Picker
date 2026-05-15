@@ -1,10 +1,16 @@
 #!/usr/bin/env python
+import sys
 import warnings
 from datetime import datetime
+from pathlib import Path
+
 from dotenv import load_dotenv
 
-from src.stock_picker.crew import StockPicker
-from src.stock_picker.gradio_ui.stock_picker_ui import StockPickerUi
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from stock_picker.crew import StockPicker
+from stock_picker.gradio_ui.stock_picker_ui import StockPickerUi
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
