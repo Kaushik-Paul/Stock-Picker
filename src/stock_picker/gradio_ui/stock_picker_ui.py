@@ -2,50 +2,51 @@ import gradio as gr
 
 
 class StockPickerUi:
+    CSS = """
+    .center-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .narrow {
+        width: 40% !important;
+        margin: 0 auto;
+    }
+    .wide {
+        width: 90% !important;
+        margin: 20px auto;
+    }
+    .result-content {
+        text-align: left;
+        display: inline-block;
+        margin: 20px auto;
+        max-width: 100%;
+        text-align: left;
+    }
+    .disclaimer {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #fff3cd;
+        border-left: 5px solid #ffc107;
+        color: #856404;
+        font-size: 0.9em;
+    }
+    """
+
+    CUSTOM_JS = "() => { document.title = 'AI Stock Picker'; }"
+
+    @staticmethod
+    def launch_kwargs():
+        return {"css": StockPickerUi.CSS, "js": StockPickerUi.CUSTOM_JS}
 
     @staticmethod
     def create_gradio_interface(run_stock_picker):
         """
         Create and launch the Gradio interface.
         """
-        css = """
-        .center-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .narrow {
-            width: 40% !important;
-            margin: 0 auto;
-        }
-        .wide {
-            width: 90% !important;
-            margin: 20px auto;
-        }
-        .result-content {
-            text-align: left;
-            display: inline-block;
-            margin: 20px auto;
-            max-width: 100%;
-            text-align: left;
-        }
-        .disclaimer {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #fff3cd;
-            border-left: 5px solid #ffc107;
-            color: #856404;
-            font-size: 0.9em;
-        }
-        """
-
-        custom_js = "() => { document.title = 'AI Stock Picker'; }"
-
         with gr.Blocks(
-                title="AI Stock Picker",
-                css=css,
-                js=custom_js
+                title="AI Stock Picker"
         ) as demo:
             with gr.Column(elem_classes=["center-content"]):
                 gr.Markdown("# AI Stock Picker\n\nEnter a sector to analyze and get stock recommendations.")

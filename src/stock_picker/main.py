@@ -9,7 +9,7 @@ from src.stock_picker.gradio_ui.stock_picker_ui import StockPickerUi
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 # load environment variables
-load_dotenv(override=True)
+load_dotenv()
 
 def run_stock_picker(sector, email_address):
     """
@@ -33,4 +33,4 @@ def run_stock_picker(sector, email_address):
 
 if __name__ == "__main__":
     stock_picker = StockPickerUi.create_gradio_interface(run_stock_picker)
-    stock_picker.launch()
+    stock_picker.launch(**StockPickerUi.launch_kwargs())
