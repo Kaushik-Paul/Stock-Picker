@@ -8,7 +8,7 @@ from typing import List
 from .tools.push_tool import MailJetNotificationTool
 from .model_client import create_llm, opencode_go_tools_enabled, using_opencode_go
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+OUTPUT_DIR = Path("src/stock_picker/output")
 
 class TrendingCompany(BaseModel):
     """ A company that is in the news and attracting attention """
@@ -66,7 +66,7 @@ class StockPicker():
         config = dict(self.tasks_config[task_name])
         output_file = config.get("output_file")
         if output_file:
-            config["output_file"] = str(PROJECT_ROOT / output_file)
+            config["output_file"] = str(OUTPUT_DIR / Path(output_file).name)
         return config
     
     @task
