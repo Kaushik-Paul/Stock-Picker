@@ -1,0 +1,350 @@
+(stock-picker)  kaushik@kaushik-Mi-NoteBook-Ultra  ~/Kaushik/Projects/Stock-Picker   more-improvements ± 
+(stock-picker)  kaushik@kaushik-Mi-NoteBook-Ultra  ~/Kaushik/Projects/Stock-Picker   more-improvements ±  python src/stock_picker/main.py
+/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:323: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+  warnings.warn(  # deprecated in 14.0 - 2024-11-09
+/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/uvicorn/protocols/websockets/websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+  from websockets.server import WebSocketServerProtocol
+* Running on local URL:  http://127.0.0.1:7860
+* To create a public link, set `share=True` in `launch()`.
+╭─────────────────────────────────────────────────────────────────────────────────── Crew Execution Started ───────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                              │
+│  Crew Execution Started                                                                                                                                                                      │
+│  Name: crew                                                                                                                                                                                  │
+│  ID: 278582eb-df72-4b39-84c0-42c91bbe90f7                                                                                                                                                    │
+│  Tool Args:                                                                                                                                                                                  │
+│                                                                                                                                                                                              │
+│                                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🚀 Crew: crew
+└── 📋 Task: find_trending_companies (ID: 0aaf8380-26bb-4835-9741-d422c4239b4d)
+    Status: Executing Task...
+╭────────────────────────────────────────────────────────────────────────────────────── 🤖 Agent Started ──────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                              │
+│  Agent: Financial News Analyst that finds trending companies in Technology                                                                                                                   │
+│                                                                                                                                                                                              │
+│  Task: Find the top trending companies in the news in Technology by searching the latest news. Find new companies that you've not found before.                                              │
+│                                                                                                                                                                                              │
+│                                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🚀 Crew: crew
+└── 📋 Task: find_trending_companies (ID: 0aaf8380-26bb-4835-9741-d422c4239b4d)
+    Status: Executing Task...
+╭─────────────────────────────────────────────────────────────────────────────────── ✅ Agent Final Answer ────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                              │
+│  Agent: Financial News Analyst that finds trending companies in Technology                                                                                                                   │
+│                                                                                                                                                                                              │
+│  Final Answer:                                                                                                                                                                               │
+│  I'll help you find the top trending companies in Technology by searching for the latest news. Let me start by searching for current technology news.                                        │
+│  <minimax:tool_call>                                                                                                                                                                         │
+│  <invoke name="Brave Web Search">                                                                                                                                                            │
+│  <parameter name="query">latest technology companies trending news today 2024</parameter>                                                                                                    │
+│  </invoke>                                                                                                                                                                                   │
+│  </minimax:tool_call>                                                                                                                                                                        │
+│                                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🚀 Crew: crew
+└── 📋 Task: find_trending_companies (ID: 0aaf8380-26bb-4835-9741-d422c4239b4d)
+    Assigned to: Financial News Analyst that finds trending companies in Technology
+
+    Status: ✅ Completed
+╭────────────────────────────────────────────────────────────────────────────────────── Task Completion ───────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                              │
+│  Task Completed                                                                                                                                                                              │
+│  Name: find_trending_companies                                                                                                                                                               │
+│  Agent: Financial News Analyst that finds trending companies in Technology                                                                                                                   │
+│                                                                                                                                                                                              │
+│  Tool Args:                                                                                                                                                                                  │
+│                                                                                                                                                                                              │
+│                                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🚀 Crew: crew
+├── 📋 Task: find_trending_companies (ID: 0aaf8380-26bb-4835-9741-d422c4239b4d)
+│   Assigned to: Financial News Analyst that finds trending companies in Technology
+│
+│   Status: ✅ Completed
+└── 📋 Task: research_trending_companies (ID: a1012d14-7c64-45df-8a7d-86be86c44ff3)
+    Status: Executing Task...
+╭────────────────────────────────────────────────────────────────────────────────────── 🤖 Agent Started ──────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                              │
+│  Agent: Senior Financial Researcher                                                                                                                                                          │
+│                                                                                                                                                                                              │
+│  Task: Given a list of trending companies, provide detailed analysis of each company in a report by searching online                                                                         │
+│                                                                                                                                                                                              │
+│                                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🚀 Crew: crew
+├── 📋 Task: find_trending_companies (ID: 0aaf8380-26bb-4835-9741-d422c4239b4d)
+│   Assigned to: Financial News Analyst that finds trending companies in Technology
+│
+│   Status: ✅ Completed
+└── 📋 Task: research_trending_companies (ID: a1012d14-7c64-45df-8a7d-86be86c44ff3)
+    Status: Executing Task...
+╭─────────────────────────────────────────────────────────────────────────────────── ✅ Agent Final Answer ────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                              │
+│  Agent: Senior Financial Researcher                                                                                                                                                          │
+│                                                                                                                                                                                              │
+│  Final Answer:                                                                                                                                                                               │
+│                                                                                                                                                                                              │
+│  <minimax:tool_call>                                                                                                                                                                         │
+│  <invoke name="Brave Web Search">                                                                                                                                                            │
+│  <parameter name="query">top technology companies trending news today 2024</parameter>                                                                                                       │
+│  </invoke>                                                                                                                                                                                   │
+│  </minimax:tool_call>                                                                                                                                                                        │
+│                                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🚀 Crew: crew
+├── 📋 Task: find_trending_companies (ID: 0aaf8380-26bb-4835-9741-d422c4239b4d)
+│   Assigned to: Financial News Analyst that finds trending companies in Technology
+│
+│   Status: ✅ Completed
+└── 📋 Task: research_trending_companies (ID: a1012d14-7c64-45df-8a7d-86be86c44ff3)
+    Assigned to: Senior Financial Researcher
+
+    Status: ✅ Completed
+╭────────────────────────────────────────────────────────────────────────────────────── Task Completion ───────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                              │
+│  Task Completed                                                                                                                                                                              │
+│  Name: research_trending_companies                                                                                                                                                           │
+│  Agent: Senior Financial Researcher                                                                                                                                                          │
+│                                                                                                                                                                                              │
+│  Tool Args:                                                                                                                                                                                  │
+│                                                                                                                                                                                              │
+│                                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🚀 Crew: crew
+├── 📋 Task: find_trending_companies (ID: 0aaf8380-26bb-4835-9741-d422c4239b4d)
+│   Assigned to: Financial News Analyst that finds trending companies in Technology
+│
+│   Status: ✅ Completed
+├── 📋 Task: research_trending_companies (ID: a1012d14-7c64-45df-8a7d-86be86c44ff3)
+│   Assigned to: Senior Financial Researcher
+│
+│   Status: ✅ Completed
+└── 📋 Task: pick_best_company (ID: a228d3c9-f625-4ba2-a1c3-ffb3358bd12b)
+    Status: Executing Task...
+╭────────────────────────────────────────────────────────────────────────────────────── 🤖 Agent Started ──────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                              │
+│  Agent: Stock Picker from Research                                                                                                                                                           │
+│                                                                                                                                                                                              │
+│  Task: Analyze the research findings and pick the best company for investment. Produce a clear markdown report explaining:                                                                   │
+│    * the chosen company and why it was selected                                                                                                                                              │
+│    * the companies that were not selected and why.                                                                                                                                           │
+│                                                                                                                                                                                              │
+│                                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+ An unknown error occurred. Please check the details below.
+ Error details: 'list' object has no attribute 'rstrip'
+ An unknown error occurred. Please check the details below.
+ Error details: 'list' object has no attribute 'rstrip'
+🚀 Crew: crew
+├── 📋 Task: find_trending_companies (ID: 0aaf8380-26bb-4835-9741-d422c4239b4d)
+│   Assigned to: Financial News Analyst that finds trending companies in Technology
+│
+│   Status: ✅ Completed
+├── 📋 Task: research_trending_companies (ID: a1012d14-7c64-45df-8a7d-86be86c44ff3)
+│   Assigned to: Senior Financial Researcher
+│
+│   Status: ✅ Completed
+└── 📋 Task: pick_best_company (ID: a228d3c9-f625-4ba2-a1c3-ffb3358bd12b)
+    Status: Executing Task...
+    └── 🧠 Thinking...
+╭────────────────────────────────────────────────────────────────────────────────────── 🤖 Agent Started ──────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                              │
+│  Agent: Stock Picker from Research                                                                                                                                                           │
+│                                                                                                                                                                                              │
+│  Task: Analyze the research findings and pick the best company for investment. Produce a clear markdown report explaining:                                                                   │
+│    * the chosen company and why it was selected                                                                                                                                              │
+│    * the companies that were not selected and why.                                                                                                                                           │
+│                                                                                                                                                                                              │
+│                                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+ An unknown error occurred. Please check the details below.
+ Error details: 'list' object has no attribute 'rstrip'
+ An unknown error occurred. Please check the details below.
+ Error details: 'list' object has no attribute 'rstrip'
+╭────────────────────────────────────────────────────────────────────────────────────── 🤖 Agent Started ──────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                              │
+│  Agent: Stock Picker from Research                                                                                                                                                           │
+│                                                                                                                                                                                              │
+│  Task: Analyze the research findings and pick the best company for investment. Produce a clear markdown report explaining:                                                                   │
+│    * the chosen company and why it was selected                                                                                                                                              │
+│    * the companies that were not selected and why.                                                                                                                                           │
+│                                                                                                                                                                                              │
+│                                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+ An unknown error occurred. Please check the details below.
+ Error details: 'list' object has no attribute 'rstrip'
+ An unknown error occurred. Please check the details below.
+ Error details: 'list' object has no attribute 'rstrip'
+🚀 Crew: crew
+├── 📋 Task: find_trending_companies (ID: 0aaf8380-26bb-4835-9741-d422c4239b4d)
+│   Assigned to: Financial News Analyst that finds trending companies in Technology
+│
+│   Status: ✅ Completed
+├── 📋 Task: research_trending_companies (ID: a1012d14-7c64-45df-8a7d-86be86c44ff3)
+│   Assigned to: Senior Financial Researcher
+│
+│   Status: ✅ Completed
+└── 📋 Task: pick_best_company (ID: a228d3c9-f625-4ba2-a1c3-ffb3358bd12b)
+    Assigned to: Stock Picker from Research
+
+    Status: ❌ Failed
+    └── 🧠 Thinking...
+╭──────────────────────────────────────────────────────────────────────────────────────── Task Failure ────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                              │
+│  Task Failed                                                                                                                                                                                 │
+│  Name: pick_best_company                                                                                                                                                                     │
+│  Agent: Stock Picker from Research                                                                                                                                                           │
+│                                                                                                                                                                                              │
+│  Tool Args:                                                                                                                                                                                  │
+│                                                                                                                                                                                              │
+│                                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+╭──────────────────────────────────────────────────────────────────────────────────────── Crew Failure ────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                                              │
+│  Crew Execution Failed                                                                                                                                                                       │
+│  Name: crew                                                                                                                                                                                  │
+│  ID: 278582eb-df72-4b39-84c0-42c91bbe90f7                                                                                                                                                    │
+│  Tool Args:                                                                                                                                                                                  │
+│  Final Output:                                                                                                                                                                               │
+│                                                                                                                                                                                              │
+│                                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Traceback (most recent call last):
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agent.py", line 451, in execute_task
+    result = self._execute_without_timeout(task_prompt, task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agent.py", line 547, in _execute_without_timeout
+    return self.agent_executor.invoke(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agents/crew_agent_executor.py", line 114, in invoke
+    formatted_answer = self._invoke_loop()
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agents/crew_agent_executor.py", line 221, in _invoke_loop
+    raise e
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agents/crew_agent_executor.py", line 194, in _invoke_loop
+    self._append_message(formatted_answer.text, role="assistant")
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agents/crew_agent_executor.py", line 262, in _append_message
+    self.messages.append(format_message_for_llm(text, role=role))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/utilities/agent_utils.py", line 118, in format_message_for_llm
+    prompt = prompt.rstrip()
+             ^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'rstrip'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agent.py", line 451, in execute_task
+    result = self._execute_without_timeout(task_prompt, task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agent.py", line 547, in _execute_without_timeout
+    return self.agent_executor.invoke(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agents/crew_agent_executor.py", line 114, in invoke
+    formatted_answer = self._invoke_loop()
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agents/crew_agent_executor.py", line 221, in _invoke_loop
+    raise e
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agents/crew_agent_executor.py", line 194, in _invoke_loop
+    self._append_message(formatted_answer.text, role="assistant")
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agents/crew_agent_executor.py", line 262, in _append_message
+    self.messages.append(format_message_for_llm(text, role=role))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/utilities/agent_utils.py", line 118, in format_message_for_llm
+    prompt = prompt.rstrip()
+             ^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'rstrip'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/gradio/queueing.py", line 867, in process_events
+    response = await route_utils.call_process_api(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/gradio/route_utils.py", line 374, in call_process_api
+    output = await app.get_blocks().process_api(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/gradio/blocks.py", line 2179, in process_api
+    result = await self.call_function(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/gradio/blocks.py", line 1636, in call_function
+    prediction = await anyio.to_thread.run_sync(  # type: ignore
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2470, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/gradio/utils.py", line 1061, in wrapper
+    response = f(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/src/stock_picker/main.py", line 93, in run_stock_picker
+    result = StockPicker().crew().kickoff(inputs=inputs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/crew.py", line 661, in kickoff
+    result = self._run_sequential_process()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/crew.py", line 772, in _run_sequential_process
+    return self._execute_tasks(self.tasks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/crew.py", line 875, in _execute_tasks
+    task_output = task.execute_sync(
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/task.py", line 382, in execute_sync
+    return self._execute_core(agent, context, tools)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/task.py", line 530, in _execute_core
+    raise e  # Re-raise the exception after emitting the event
+    ^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/task.py", line 446, in _execute_core
+    result = agent.execute_task(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agent.py", line 487, in execute_task
+    result = self.execute_task(task, context, tools)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agent.py", line 487, in execute_task
+    result = self.execute_task(task, context, tools)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agent.py", line 486, in execute_task
+    raise e
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agent.py", line 451, in execute_task
+    result = self._execute_without_timeout(task_prompt, task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agent.py", line 547, in _execute_without_timeout
+    return self.agent_executor.invoke(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agents/crew_agent_executor.py", line 114, in invoke
+    formatted_answer = self._invoke_loop()
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agents/crew_agent_executor.py", line 221, in _invoke_loop
+    raise e
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agents/crew_agent_executor.py", line 194, in _invoke_loop
+    self._append_message(formatted_answer.text, role="assistant")
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/agents/crew_agent_executor.py", line 262, in _append_message
+    self.messages.append(format_message_for_llm(text, role=role))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kaushik/Kaushik/Projects/Stock-Picker/.venv/lib/python3.12/site-packages/crewai/utilities/agent_utils.py", line 118, in format_message_for_llm
+    prompt = prompt.rstrip()
+             ^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'rstrip'
+
+

@@ -83,17 +83,18 @@ class StockPicker():
     @crew
     def crew(self) -> Crew:
         """Creates the StockPicker crew"""
-
-        manager = Agent(
-            config=self.agents_config['manager'],
-            llm=create_llm(manager=True),
-            allow_delegation=True
-        )
             
         return Crew(
-            agents=self.agents,
-            tasks=self.tasks, 
-            process=Process.hierarchical,
+            agents=[
+                self.trending_company_finder(),
+                self.financial_researcher(),
+                self.stock_picker(),
+            ],
+            tasks=[
+                self.find_trending_companies(),
+                self.research_trending_companies(),
+                self.pick_best_company(),
+            ],
+            process=Process.sequential,
             verbose=True,
-            manager_agent=manager,
         )

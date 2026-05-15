@@ -1,7 +1,21 @@
 import os
 import socket
+import sys
 
-import gradio as gr
+try:
+    import gradio as gr
+except ModuleNotFoundError as exc:
+    if exc.name != "gradio":
+        raise
+    virtual_env = os.getenv("VIRTUAL_ENV", "not set")
+    raise ModuleNotFoundError(
+        "Gradio is not installed in the active Python environment.\n"
+        f"Python executable: {sys.executable}\n"
+        f"VIRTUAL_ENV: {virtual_env}\n"
+        "From this repo, run one of:\n"
+        "  source .venv/bin/activate && python src/stock_picker/main.py\n"
+        "  uv run python src/stock_picker/main.py"
+    ) from exc
 
 
 class StockPickerUi:
