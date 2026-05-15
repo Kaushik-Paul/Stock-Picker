@@ -6,8 +6,8 @@ from pydantic import BaseModel, Field
 import os
 from mailjet_rest import Client
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
-EMAIL_STATUS_PATH = PROJECT_ROOT / "output/email_status.json"
+OUTPUT_DIR = Path("src/stock_picker/output")
+EMAIL_STATUS_PATH = OUTPUT_DIR / "email_status.json"
 
 
 class MailJetNotification(BaseModel):

@@ -19,8 +19,7 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # load environment variables
 load_dotenv()
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-OUTPUT_DIR = PROJECT_ROOT / "output"
+OUTPUT_DIR = Path("src/stock_picker/output")
 REPORT_PATH = OUTPUT_DIR / "decision.md"
 
 
