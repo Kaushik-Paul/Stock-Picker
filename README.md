@@ -126,11 +126,11 @@ MAILJET_FROM_EMAIL=your_verified_email@yourdomain.com
 ### 6) Run the app
 Using uv:
 ```bash
-uv run python -m src.stock_picker.main
+uv run python src/stock_picker/main.py
 ```
 Using python directly:
 ```bash
-python -m src.stock_picker.main
+python src/stock_picker/main.py
 ```
 Gradio will print a local URL (e.g., http://127.0.0.1:7860). Open it in your browser.
 
