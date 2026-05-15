@@ -19,7 +19,9 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # load environment variables
 load_dotenv()
 
-REPORT_PATH = Path("output/decision.md")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+OUTPUT_DIR = PROJECT_ROOT / "output"
+REPORT_PATH = OUTPUT_DIR / "decision.md"
 
 
 def _report_markdown(result):
@@ -77,6 +79,7 @@ def run_stock_picker(sector, email_address):
     }
 
     # Create and run the crew
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     _remove_email_status_marker()
     result = StockPicker().crew().kickoff(inputs=inputs)
     report = _report_markdown(result)

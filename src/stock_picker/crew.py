@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from .tools.throttled_brave_tool import ThrottledBraveSearchTool
@@ -5,6 +7,8 @@ from pydantic import BaseModel, Field
 from typing import List
 from .tools.push_tool import MailJetNotificationTool
 from .model_client import create_llm, opencode_go_tools_enabled, using_opencode_go
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 class TrendingCompany(BaseModel):
     """ A company that is in the news and attracting attention """
@@ -57,31 +61,38 @@ class StockPicker():
         if using_opencode_go() and not opencode_go_tools_enabled():
             return []
         return [ThrottledBraveSearchTool()]
+
+    def _task_config(self, task_name):
+        config = dict(self.tasks_config[task_name])
+        output_file = config.get("output_file")
+        if output_file:
+            config["output_file"] = str(PROJECT_ROOT / output_file)
+        return config
     
     @task
     def find_trending_companies(self) -> Task:
         return Task(
-            config=self.tasks_config['find_trending_companies'],
+            config=self._task_config('find_trending_companies'),
             output_pydantic=TrendingCompanyList,
         )
 
     @task
     def research_trending_companies(self) -> Task:
         return Task(
-            config=self.tasks_config['research_trending_companies'],
+            config=self._task_config('research_trending_companies'),
             output_pydantic=TrendingCompanyResearchList,
         )
 
     @task
     def pick_best_company(self) -> Task:
         return Task(
-            config=self.tasks_config['pick_best_company'],
+            config=self._task_config('pick_best_company'),
         )
 
     @task
     def email_sender_task(self) -> Task:
         return Task(
-            config=self.tasks_config['send_email_task'],
+            config=self._task_config('send_email_task'),
         )
 
     @crew
