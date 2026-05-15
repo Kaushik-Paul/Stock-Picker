@@ -4,6 +4,7 @@ from .tools.throttled_brave_tool import ThrottledBraveSearchTool
 from pydantic import BaseModel, Field
 from typing import List
 from .tools.push_tool import MailJetNotificationTool
+from .model_client import create_llm
 
 class TrendingCompany(BaseModel):
     """ A company that is in the news and attracting attention """
@@ -37,21 +38,21 @@ class StockPicker():
     @agent
     def trending_company_finder(self) -> Agent:
         return Agent(config=self.agents_config['trending_company_finder'],
-                     tools=[ThrottledBraveSearchTool()], memory=True)
+                     tools=[ThrottledBraveSearchTool()], llm=create_llm(), memory=True)
     
     @agent
     def financial_researcher(self) -> Agent:
         return Agent(config=self.agents_config['financial_researcher'], 
-                     tools=[ThrottledBraveSearchTool()])
+                     tools=[ThrottledBraveSearchTool()], llm=create_llm())
 
     @agent
     def stock_picker(self) -> Agent:
-        return Agent(config=self.agents_config['stock_picker'], memory=True)
+        return Agent(config=self.agents_config['stock_picker'], llm=create_llm(), memory=True)
 
     @agent
     def email_sender(self) -> Agent:
         return Agent(config=self.agents_config['email_sender'],
-                     tools=[MailJetNotificationTool()], memory=True)
+                     tools=[MailJetNotificationTool()], llm=create_llm(), memory=True)
     
     @task
     def find_trending_companies(self) -> Task:
@@ -85,6 +86,7 @@ class StockPicker():
 
         manager = Agent(
             config=self.agents_config['manager'],
+            llm=create_llm(manager=True),
             allow_delegation=True
         )
             
