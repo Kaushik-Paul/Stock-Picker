@@ -11,7 +11,7 @@ An AI-powered stock research assistant that:
 - Picks the best candidate for investment with a clear, markdown report
 - Emails the full HTML report to you
 
-The app uses a Gradio UI backed by a CrewAI pipeline with multiple agents and tools. It can use either OpenCode Go or OpenRouter for LLM calls, and Brave Search for web data.
+The app uses a Gradio UI backed by a CrewAI pipeline with multiple agents and tools. It connects to any OpenAI-compatible LLM endpoint and uses Brave Search for web data.
 
 ## Live Demo
 - Access the app: [https://projects.kaushikpaul.co.in/stock-picker](https://projects.kaushikpaul.co.in/stock-picker)
@@ -96,23 +96,17 @@ pip install -r requirements.txt
    - Follow the verification email sent by MailJet
 
 ### 5) Create a .env file
-Create a `.env` file in the project root with the following variables (adjust as needed):
+Copy the example environment file, then replace the placeholders with your credentials and model configuration:
+
+```bash
+cp .env.example .env
+```
 
 ```ini
-# LLM provider
-# false = OpenCode Go, true = OpenRouter
-USE_OPENROUTER=false
-
-# OpenCode Go
-OPENCODE_GO_API_KEY=your_opencode_go_key
-OPENCODE_GO_MODEL=deepseek-v4-flash
-OPENCODE_GO_API_STYLE=auto
-OPENCODE_GO_ENABLE_TOOLS=true
-
-# OpenRouter
-OPENROUTER_API_KEY=your_openrouter_key
-OPENROUTER_MODEL=deepseek/deepseek-chat-v3.1:free
-OPENROUTER_MANAGER_MODEL=meta-llama/llama-3.1-405b-instruct:free
+# OpenAI-compatible LLM endpoint
+BASE_URL=https://api.example.com/v1
+API_KEY=your_llm_api_key
+MODEL=your_model_id
 
 # Brave Search (used by BraveSearchTool)
 # Name per crewai_tools BraveSearchTool docs; commonly BRAVE_API_KEY
@@ -150,10 +144,11 @@ To learn more about CrewAI and how to extend this project, visit the [official d
 ## Configuration
 
 ### LLMs and Agents
-- Files: `src/stock_picker/model_client.py`, `src/stock_picker/constants.py`
-- `USE_OPENROUTER=false` uses OpenCode Go with `OPENCODE_GO_API_KEY` and `OPENCODE_GO_MODEL`.
-- `USE_OPENROUTER=true` uses OpenRouter with `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, and `OPENROUTER_MANAGER_MODEL`.
-- The default OpenCode Go model is `minimax-m2.7`. With `OPENCODE_GO_API_STYLE=auto`, MiniMax models use the Anthropic-style `/messages` endpoint and OpenAI-compatible models use `/chat/completions`. If OpenCode adds models later, set `OPENCODE_GO_MODEL` to the new model ID; no code change is needed unless the provider adds a third API style.
+- File: `src/stock_picker/model_client.py`
+- `BASE_URL` is the root URL of an OpenAI-compatible API, usually ending in `/v1`.
+- `API_KEY` authenticates requests to that endpoint.
+- `MODEL` is the model ID accepted by the endpoint. Use the provider's raw model ID; an optional `openai/` prefix is also accepted.
+- All agents use the same endpoint and model configuration.
 
 ### Tasks & Outputs
 - File: `src/stock_picker/config/tasks.yaml`
@@ -185,7 +180,7 @@ Generated files are saved under `src/stock_picker/output/`:
 - The project is hosted at: [https://projects.kaushikpaul.co.in/stock-picker](https://projects.kaushikpaul.co.in/stock-picker)
 - To deploy your own Space:
   - Set Space SDK to “Gradio”. The root `app.py` is the Space entrypoint.
-  - Add required secrets in the Space settings (`USE_OPENROUTER`, `OPENCODE_GO_API_KEY`, `OPENCODE_GO_MODEL`, `BRAVE_API_KEY`, `MAILJET_API_KEY`, `MAILJET_API_SECRET`, `MAILJET_FROM_EMAIL`). If using OpenRouter, add `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, and optionally `OPENROUTER_MANAGER_MODEL`.
+  - Add the required secrets in the Space settings: `BASE_URL`, `API_KEY`, `MODEL`, `BRAVE_API_KEY`, `MAILJET_API_KEY`, `MAILJET_API_SECRET`, and `MAILJET_FROM_EMAIL`.
   - Ensure the Python version matches (3.10–3.12) and install via `requirements.txt` or `pyproject.toml`.
   - To deploy without `gradio deploy`, set `HF_TOKEN` and run:
 ```bash
@@ -200,9 +195,8 @@ uv run python scripts/deploy_space.py
 - __Mailjet send failures__
   - Check API credentials, sender domain verification, and recipient address validity.
 - __LLM errors / 429s__
-  - Confirm `USE_OPENROUTER` is set as intended.
-  - For OpenCode Go, confirm `OPENCODE_GO_API_KEY`, `OPENCODE_GO_MODEL`, and `OPENCODE_GO_API_STYLE=auto` are set.
-  - For OpenRouter, confirm `OPENROUTER_API_KEY` and model IDs are valid.
+  - Confirm `BASE_URL` exposes an OpenAI-compatible chat completions API.
+  - Confirm `API_KEY` is valid and `MODEL` is available to that key.
 - __Virtualenv issues on Windows__
   - Use `.venv\Scripts\activate` and ensure `python` points to the venv interpreter.
 
