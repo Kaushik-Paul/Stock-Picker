@@ -6,7 +6,7 @@ from .tools.throttled_brave_tool import ThrottledBraveSearchTool
 from pydantic import BaseModel, Field
 from typing import List
 from .tools.push_tool import MailJetNotificationTool
-from .model_client import create_llm, opencode_go_tools_enabled, using_opencode_go
+from .model_client import create_llm
 
 OUTPUT_DIR = Path("src/stock_picker/output")
 
@@ -58,8 +58,6 @@ class StockPicker():
                      tools=[MailJetNotificationTool()], llm=create_llm(), memory=True)
 
     def _search_tools(self):
-        if using_opencode_go() and not opencode_go_tools_enabled():
-            return []
         return [ThrottledBraveSearchTool()]
 
     def _task_config(self, task_name):
